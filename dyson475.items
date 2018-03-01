@@ -1,0 +1,22 @@
+// Dyson Pure Cool Link Items
+
+// REQUESTS
+// 475/<id>/command
+String Dyson475_Request              "[%s]" {mqtt=">[dyson475:475/<dev-id>/command:command:*:default]"}
+// TOPIC
+// 475/<id>/status/current
+String Dyson475_Topic_Status_Current "[%s]" {mqtt="<[dyson475:475/<dev-id>/status/current:state:default]"}
+
+//VIRTUAL ITEMS
+Number Dyson475_Tact "Temperature [%.1f °C]"  <temperature>
+Number Dyson475_Hact "Humidity [%.0f %%]"     <humidity>
+Number Dyson475_Pact "P-Value [%d]"           <smoke>
+Number Dyson475_Vact "V-Value [%d]"           <smoke>
+Number Dyson475_Fmod "Mode"                   <switch>
+Switch Dyson475_Rhtm "Contin. Measurement"    <line>
+Number Dyson475_Fnsp "Fan Speed [%d]"         <flow>
+Number Dyson475_Qtar "Quality Target"         <smoke>
+Switch Dyson475_Oson "Turning"                <incline>
+Switch Dyson475_Nmod "Night Mode"             <moon>
+Number Dyson475_Filf "Remaining Filter Hours" <sewerage>
+Number Dyson475_Fnst "Fan Activity [%d]"      <fan>

@@ -1,0 +1,16 @@
+sitemap dyson475-de label="Dyson Pure Cool Link Sitemap" {
+    Frame label="Pure Cool Link" {
+        Default  item=Dyson475_Tact "Temperatur [%.1f °C]"         
+        Default  item=Dyson475_Hact "Feuchtigkeit [%.0f %%]"       
+        Default  item=Dyson475_Pact "P-Wert [%d]"                  
+        Default  item=Dyson475_Vact "V-Wert [%d]"                  
+        Switch   item=Dyson475_Fmod "Modus" mappings=[0="OFF", 1="FAN", 2="AUTO"]
+        Default  item=Dyson475_Rhtm "Dauermessung"                 
+        Setpoint item=Dyson475_Fnsp "Lüfterstufe [%d]" minValue=1 maxValue=10 step=1
+        Switch   item=Dyson475_Qtar "Zielqualität" mappings=[1="NIEDRIG", 3="MITTEL", 4="HOCH"]
+        Default  item=Dyson475_Oson "Drehung"                      
+        Default  item=Dyson475_Nmod "Nachtmodus"                   
+        Default  item=Dyson475_Filf "Filterrestlebensdauer [%d h]" 
+        Default  item=Dyson475_Fnst "Lüfteraktivität [%d]"         
+    }
+}
