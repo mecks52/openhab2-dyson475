@@ -31,7 +31,7 @@ dyson475_items_str = dyson475_items.read()
 
 # Replace placeholder <dev-id> with actual device identification
 mqtt_cfg_str.replace("<dev-id>", dev_id)
-dyson475_items_str.replace("<dev-id>", dev-id)
+dyson475_items_str.replace("<dev-id>", dev_id)
 
 # Replace placeholder <pwd-hash> with actual password hash
 mqtt_cfg_str.replace("<pwd-hash>", pwd_hash)
