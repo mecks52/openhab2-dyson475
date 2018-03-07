@@ -1,4 +1,4 @@
-sitemap dyson475-en label="Dyson Pure Cool Link Sitemap" {
+sitemap dyson475en label="Dyson Pure Cool Link Sitemap" {
     Frame label="Pure Cool Link" {
         Default  item=Dyson475_Tact label="Temperature [%.1f °C]"
         Default  item=Dyson475_Hact label="Humidity [%.0f %%]"
@@ -10,7 +10,7 @@ sitemap dyson475-en label="Dyson Pure Cool Link Sitemap" {
         Switch   item=Dyson475_Qtar label="Quality Target" mappings=[1="LOW", 3="AVERAGE", 4="HIGH"]
         Default  item=Dyson475_Oson label="Turning"
         Default  item=Dyson475_Nmod label="Night Mode"
-        Default  item=Dyson475_Filf label="Remaining Filter Hours"
+        Default  item=Dyson475_Filf label="Remaining Filter Hours [%d h]"
         Default  item=Dyson475_Fnst label="Fan Activity [%d]"
     }
 }
