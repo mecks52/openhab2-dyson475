@@ -312,7 +312,7 @@ then
     // Cast hmax to String representation
     var double hmax = Float.parseFloat(receivedCommand.toString())
     hmax = (hmax * 10) + 2731.5
-    val int hmax_int = Integer.parseInt(hmax.toString())
+    val int hmax_int = Integer.parseInt(Math::round(hmax).toString())
     // Create JSON for commanding and send it
     cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
     cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
