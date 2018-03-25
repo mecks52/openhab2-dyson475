@@ -1,0 +1,26 @@
+// Dyson Pure Cool Link Items
+
+// REQUESTS
+// 455/<id>/command
+String Dyson455_Request              "[%s]" {mqtt=">[dyson455:455/<dev-id>/command:command:*:default]"}
+// TOPIC
+// 455/<id>/status/current
+String Dyson455_Topic_Status_Current "[%s]" {mqtt="<[dyson455:455/<dev-id>/status/current:state:default]"}
+
+//VIRTUAL ITEMS
+Number Dyson455_Tact "Temperature [%.1f °C]"         <temperature>
+Number Dyson455_Hact "Humidity [%.0f %%]"            <humidity>
+Number Dyson455_Pact "P-Value [%d]"                  <smoke>
+Number Dyson455_Vact "V-Value [%d]"                  <smoke>
+Number Dyson455_Fmod "Mode"                          <switch>
+Switch Dyson455_Rhtm "Contin. Measurement"           <line>
+Number Dyson455_Fnsp "Fan Speed [%d]"                <flow>
+Number Dyson455_Qtar "Quality Target"                <smoke>
+Switch Dyson455_Oson "Turning"                       <incline>
+Switch Dyson455_Nmod "Night Mode"                    <moon>
+Number Dyson455_Filf "Remaining Filter Hours [%d h]" <sewerage>
+Number Dyson455_Fnst "Fan Activity [%d]"             <fan>
+Number Dyson455_Hmod "Heater Mode"                   <switch>
+Number Dyson455_Hmax "Target Temperature [%.1f °C]"  <temperature>
+Number Dyson455_Hsta "Heating Activity [%d]"         <radiator>
+Switch Dyson455_Ffoc "Heater Focus"                  <fan>

@@ -1,0 +1,339 @@
+import java.text.SimpleDateFormat
+import java.util.TimeZone
+
+// Rules for Dyson Pure Cool Link (455)
+
+var SimpleDateFormat simpleDF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+// Start of STATE-SET msg
+val String startStateSetCmdStr = "{\"msg\":\"STATE-SET\",\"time\":"
+// Variable to store String used as command
+var String cmdStr
+
+// TOPIC "455/<id>/status/current" ############################################
+    // msg "ENVIRONMENTAL-CURRENT-SENSOR-DATA" ############
+    // msg "CURRENT-STATE" ################################
+    // msg "STATE-CHANGE" #################################
+rule "455/<id>/status/current"
+when
+    Item Dyson455_Topic_Status_Current received update
+then
+    val String content = Dyson455_Topic_Status_Current.state.toString()
+    val String msg = transform("JSONPATH", "$.msg", content)
+    if (msg == "ENVIRONMENTAL-CURRENT-SENSOR-DATA") {
+        val String tact_str = transform("JSONPATH", "$.data.tact", content)
+        if (tact_str != "OFF") {
+            var double tact = Float.parseFloat(tact_str)
+            tact = (tact - 2731.5)/10
+            postUpdate(Dyson455_Tact, tact as Number)
+        }
+        val String hact_str = transform("JSONPATH", "$.data.hact", content)
+        if (hact_str != "OFF") {
+            val int hact = Integer.parseInt(hact_str)
+            postUpdate(Dyson455_Hact, hact as Number)
+        }
+        val int pact = Integer.parseInt(transform("JSONPATH", "$.data.pact", content))
+        postUpdate(Dyson455_Pact, pact as Number)
+        val String vact_str = transform("JSONPATH", "$.data.vact", content)
+        if (vact_str != "INIT") {
+            val int vact = Integer.parseInt(vact_str)
+            postUpdate(Dyson455_Vact, vact as Number)
+        }
+    } else if (msg == "CURRENT-STATE") {
+        val String fmod_str = transform("JSONPATH", "$.product-state.fmod", content)
+        switch fmod_str {
+            case "AUTO": postUpdate(Dyson455_Fmod, 2 as Number)
+            case "FAN": postUpdate(Dyson455_Fmod, 1 as Number)
+            case "OFF": postUpdate(Dyson455_Fmod, 0 as Number)
+        }
+        if (transform("JSONPATH", "$.product-state.rhtm", content) == "ON") {
+            postUpdate(Dyson455_Rhtm, ON)
+        } else {
+            postUpdate(Dyson455_Rhtm, OFF)
+        }
+        val String fnsp = transform("JSONPATH", "$.product-state.fnsp", content)
+        if (fnsp == "AUTO") {
+            postUpdate(Dyson455_Fnsp, 11 as Number)
+        } else {
+            postUpdate(Dyson455_Fnsp, Integer.parseInt(fnsp) as Number)
+        }
+        val int qtar = Integer.parseInt(transform("JSONPATH", "$.product-state.qtar", content))
+        postUpdate(Dyson455_Qtar, qtar as Number)
+        if (transform("JSONPATH", "$.product-state.oson", content) == "ON") {
+            postUpdate(Dyson455_Oson, ON)
+        } else {
+            postUpdate(Dyson455_Oson, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.nmod", content) == "ON") {
+            postUpdate(Dyson455_Nmod, ON)
+        } else {
+            postUpdate(Dyson455_Nmod, OFF)
+        }
+        val int filf = Integer.parseInt(transform("JSONPATH", "$.product-state.filf", content))
+        postUpdate(Dyson455_Filf, filf as Number)
+        if (transform("JSONPATH", "$.product-state.fnst", content) == "FAN") {
+            postUpdate(Dyson455_Fnst, 1)
+        } else {
+            postUpdate(Dyson455_Fnst, 0)
+        }
+        val String hmod_str = transform("JSONPATH", "$.product-state.hmod", content)
+        switch hmod_str {
+            case "AUTO": postUpdate(Dyson455_Hmod, 2 as Number)
+            case "HEAT": postUpdate(Dyson455_Hmod, 1 as Number)
+            case "OFF": postUpdate(Dyson455_Hmod, 0 as Number)
+        }
+        val String hmax_str = transform("JSONPATH", "$.product-state.hmax", content)
+        if (hmax_str != "OFF") {
+            var double hmax = Float.parseFloat(hmax_str)
+            hmax = (hmax - 2731.5)/10
+            postUpdate(Dyson455_Hmax, hmax as Number)
+        }
+        if (transform("JSONPATH", "$.product-state.hsta", content) == "HEAT") {
+            postUpdate(Dyson455_Hsta, 1)
+        } else {
+            postUpdate(Dyson455_Hsta, 0)
+        }
+        if (transform("JSONPATH", "$.product-state.ffoc", content) == "ON") {
+            postUpdate(Dyson455_Ffoc, ON)
+        } else {
+            postUpdate(Dyson455_Ffoc, OFF)
+        }
+    } else if (msg == "STATE-CHANGE") {
+        val String fmod_str = transform("JSONPATH", "$.product-state.fmod[1]", content)
+        switch fmod_str {
+            case "AUTO": postUpdate(Dyson455_Fmod, 2 as Number)
+            case "FAN": postUpdate(Dyson455_Fmod, 1 as Number)
+            case "OFF": postUpdate(Dyson455_Fmod, 0 as Number)
+        }
+        if (transform("JSONPATH", "$.product-state.rhtm[1]", content) == "ON") {
+            postUpdate(Dyson455_Rhtm, ON)
+        } else {
+            postUpdate(Dyson455_Rhtm, OFF)
+        }
+        val String fnsp = transform("JSONPATH", "$.product-state.fnsp[1]", content)
+        if (fnsp == "AUTO") {
+            postUpdate(Dyson455_Fnsp, 11 as Number)
+        } else {
+            postUpdate(Dyson455_Fnsp, Integer.parseInt(fnsp) as Number)
+        }
+        val int qtar = Integer.parseInt(transform("JSONPATH", "$.product-state.qtar[1]", content))
+        postUpdate(Dyson455_Qtar, qtar as Number)
+        if (transform("JSONPATH", "$.product-state.oson[1]", content) == "ON") {
+            postUpdate(Dyson455_Oson, ON)
+        } else {
+            postUpdate(Dyson455_Oson, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.nmod[1]", content) == "ON") {
+            postUpdate(Dyson455_Nmod, ON)
+        } else {
+            postUpdate(Dyson455_Nmod, OFF)
+        }
+        val int filf = Integer.parseInt(transform("JSONPATH", "$.product-state.filf[1]", content))
+        postUpdate(Dyson455_Filf, filf as Number)
+        if (transform("JSONPATH", "$.product-state.fnst[1]", content) == "FAN") {
+            postUpdate(Dyson455_Fnst, 1)
+        } else {
+            postUpdate(Dyson455_Fnst, 0)
+        }
+        val String hmod_str = transform("JSONPATH", "$.product-state.hmod", content)
+        switch hmod_str {
+            case "AUTO": postUpdate(Dyson455_Hmod, 2 as Number)
+            case "HEAT": postUpdate(Dyson455_Hmod, 1 as Number)
+            case "OFF": postUpdate(Dyson455_Hmod, 0 as Number)
+        }
+        val String hmax_str = transform("JSONPATH", "$.product-state.hmax", content)
+        if (hmax_str != "OFF") {
+            var double hmax = Float.parseFloat(hmax_str)
+            hmax = (hmax - 2731.5)/10
+            postUpdate(Dyson455_Hmax, hmax as Number)
+        }
+        if (transform("JSONPATH", "$.product-state.hsta", content) == "HEAT") {
+            postUpdate(Dyson455_Hsta, 1)
+        } else {
+            postUpdate(Dyson455_Hsta, 0)
+        }
+        if (transform("JSONPATH", "$.product-state.ffoc", content) == "ON") {
+            postUpdate(Dyson455_Ffoc, ON)
+        } else {
+            postUpdate(Dyson455_Ffoc, OFF)
+        }
+    }
+end
+//#############################################################################
+
+// REQUEST "455/<id>/command"##################################################
+    // msg "REQUEST-CURRENT-STATE" ########################
+rule "Request Current State every 30 seconds"
+when
+    Time cron "0/30 * * * * ?"
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    cmdStr = "{\"msg\":\"REQUEST-CURRENT-STATE\","
+    cmdStr = cmdStr + " \"time\":\"" + timeStampUtc + "Z\"}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+
+    // msg "SET-STATE" ####################################
+rule "455/<id>/command SET-STATE fmod"
+when
+    Item Dyson455_Fmod received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast fmod to String representation
+    var String fmod = "OFF"
+    switch receivedCommand {
+        case 2: fmod = "AUTO"
+        case 1: fmod = "FAN"
+    }
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"fmod\":\"" + fmod + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+
+rule "455/<id>/command SET-STATE  fnsp"
+when
+    Item Dyson455_Fnsp received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast fnsp to String representation
+    val String fnsp = receivedCommand.toString()
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"fnsp\":\"" + fnsp + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+
+rule "455/<id>/command SET-STATE  qtar"
+when
+    Item Dyson455_Qtar received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast qtar to String representation
+    val String qtar = receivedCommand.toString()
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"qtar\":\""+ qtar + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+
+rule "455/<id>/command SET-STATE  oson"
+when
+    Item Dyson455_Oson received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast oson to String representation
+    var String oson = "OFF"
+    if (receivedCommand == ON) oson = "ON"
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"oson\":\"" + oson + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+
+rule "455/<id>/command SET-STATE  rhtm"
+when
+    Item Dyson455_Rhtm received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast rhtm and fmod to String representation
+    var String fmod = "OFF"
+    switch Dyson455_Fmod.state {
+        case 2: fmod = "AUTO"
+        case 1: fmod = "FAN"
+    }
+    var String rhtm = "OFF"
+    if (receivedCommand == ON) rhtm = "ON"
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"fmod\":\"" + fmod + "\""
+    cmdStr = cmdStr + "\"rhtm\":\"" + rhtm + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+
+rule "455/<id>/command SET-STATE  nmod"
+when
+    Item Dyson455_Nmod received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast nmod to String representation
+    var String nmod = "OFF"
+    if (receivedCommand == ON) nmod = "ON"
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"nmod\":\"" + nmod + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+rule "455/<id>/command SET-STATE hmod"
+when
+    Item Dyson455_Hmod received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast hmod to String representation
+    var String hmod = "OFF"
+    switch receivedCommand {
+        case 1: hmod = "HEAT"
+    }
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"hmod\":\"" + hmod + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+
+rule "455/<id>/command SET-STATE  hmax"
+when
+    Item Dyson455_Hmax received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast hmax to String representation
+    var double hmax = Float.parseFloat(receivedCommand.toString())
+    hmax = (hmax * 10) + 2731.5
+    val int hmax_int = Integer.parseInt(hmax.toString())
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"hmax\":\"" + hmax_int.toString() + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+
+rule "455/<id>/command SET-STATE  ffoc"
+when
+    Item Dyson455_Ffoc received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast ffoc to String representation
+    var String ffoc = "OFF"
+    if (receivedCommand == ON) ffoc = "ON"
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"ffoc\":\"" + ffoc + "\"}}"
+    Dyson455_Request.sendCommand(cmdStr)
+end
+//#############################################################################

@@ -1,0 +1,20 @@
+sitemap dyson455en label="Dyson Pure Cool Link Sitemap" {
+    Frame label="Pure Cool Link" {
+        Default  item=Dyson455_Tact label="Temperature [%.1f °C]"
+        Default  item=Dyson455_Hact label="Humidity [%.0f %%]"
+        Default  item=Dyson455_Pact label="P-Value [%d]"
+        Default  item=Dyson455_Vact label="V-Value [%d]"
+        Switch   item=Dyson455_Fmod label="Mode" mappings=[0="OFF", 1="FAN", 2="AUTO"]
+        Default  item=Dyson455_Rhtm label="Contin. Measurement"
+        Setpoint item=Dyson455_Fnsp label="Fan Speed [%d]" minValue=1 maxValue=10 step=1
+        Switch   item=Dyson455_Qtar label="Quality Target" mappings=[1="LOW", 3="AVERAGE", 4="HIGH"]
+        Default  item=Dyson455_Oson label="Turning"
+        Default  item=Dyson455_Nmod label="Night Mode"
+        Default  item=Dyson455_Filf label="Remaining Filter Hours"
+        Default  item=Dyson455_Fnst label="Fan Activity [%d]"
+        Switch   item=Dyson455_Hmod label="Heater Mode" mappings=[0="COOL", 1="HEAT"]
+        Setpoint item=Dyson455_Hmax label="Target Temperature [%.0f °C]" minValue=1 maxValue=37 step=1
+        Default  item=Dyson455_Ffoc label="Heater Focus"
+        Default  item=Dyson455_Hsta label="Heater Activity [%d]"
+    }
+}
