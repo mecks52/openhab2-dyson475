@@ -1,0 +1,22 @@
+// Dyson Pure Cool Link Items
+
+// REQUESTS
+// 469/<id>/command
+String Dyson469_Request              "[%s]" {mqtt=">[dyson469:469/<dev-id>/command:command:*:default]"}
+// TOPIC
+// 469/<id>/status/current
+String Dyson469_Topic_Status_Current "[%s]" {mqtt="<[dyson469:469/<dev-id>/status/current:state:default]"}
+
+//VIRTUAL ITEMS
+Number Dyson469_Tact "Temperature [%.1f °C]"  <temperature>
+Number Dyson469_Hact "Humidity [%.0f %%]"     <humidity>
+Number Dyson469_Pact "P-Value [%d]"           <smoke>
+Number Dyson469_Vact "V-Value [%d]"           <smoke>
+Number Dyson469_Fmod "Mode"                   <switch>
+Switch Dyson469_Rhtm "Contin. Measurement"    <line>
+Number Dyson469_Fnsp "Fan Speed [%d]"         <flow>
+Number Dyson469_Qtar "Quality Target"         <smoke>
+Switch Dyson469_Oson "Turning"                <incline>
+Switch Dyson469_Nmod "Night Mode"             <moon>
+Number Dyson469_Filf "Remaining Filter Hours" <sewerage>
+Number Dyson469_Fnst "Fan Activity [%d]"      <fan>

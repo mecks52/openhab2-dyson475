@@ -1,0 +1,16 @@
+sitemap dyson469en label="Dyson Pure Cool Link Sitemap" {
+    Frame label="Pure Cool Link" {
+        Default  item=Dyson469_Tact label="Temperature [%.1f °C]"
+        Default  item=Dyson469_Hact label="Humidity [%.0f %%]"
+        Default  item=Dyson469_Pact label="P-Value [%d]"
+        Default  item=Dyson469_Vact label="V-Value [%d]"
+        Switch   item=Dyson469_Fmod label="Mode" mappings=[0="OFF", 1="FAN", 2="AUTO"]
+        Default  item=Dyson469_Rhtm label="Contin. Measurement"
+        Setpoint item=Dyson469_Fnsp label="Fan Speed [%d]" minValue=1 maxValue=10 step=1
+        Switch   item=Dyson469_Qtar label="Quality Target" mappings=[1="LOW", 3="AVERAGE", 4="HIGH"]
+        Default  item=Dyson469_Oson label="Turning"
+        Default  item=Dyson469_Nmod label="Night Mode"
+        Default  item=Dyson469_Filf label="Remaining Filter Hours [%d h]"
+        Default  item=Dyson469_Fnst label="Fan Activity [%d]"
+    }
+}

@@ -38,7 +38,7 @@ Install the mqtt binding within your openHAB installation.
 ### Step 4)
 Copy the content of mqtt.cfg file into services/mqtt.cfg.
 ### Step 5)
-Copy dyson475.items into items/ and dyson475.rules into rules/ directory.
+Copy the dysonXXX.items suitable for your device (e.g. dyson455.items) into items/ and dysonXXX.rules (e.g. dyson455.rules) into rules/ directory.
 ### Step 6)
 Copy the sitemap with your preferred language into the sitemaps/ directory.
 
