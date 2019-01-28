@@ -1,0 +1,8 @@
+Bridge mqtt:broker:dysonApBroker [ host="<ip-addr>", secure=false, username="<dev-id>", password="<pwd-hash>", qos=1]
+{
+    Thing topic dysonAp {
+    Channels:
+        Type string : status "Status"   [ stateTopic="<ap_type>/<dev-id>/status/current" ]
+        Type string : command "Command" [ commandTopic="<ap_type>/<dev-id>/command" ]
+    }
+}

@@ -36,6 +36,18 @@ mqtt_cfg_f.close()
 with open("mqtt.cfg", 'w') as mqtt_cfg_f:
     mqtt_cfg_f.write(mqtt_cfg_str)
 mqtt_cfg_f.close()
+# Create dysonapbroker.things file
+ap_broker = "./dysonapbroker.things"
+with open(ap_broker, 'r') as ap_broker_f:
+    ap_broker_cfg_str = ap_broker_f.read()
+    ap_broker_cfg_str = ap_broker_cfg_str.replace("<ap_type>", ap_type)
+    ap_broker_cfg_str = ap_broker_cfg_str.replace("<dev-id>", dev_id)
+    ap_broker_cfg_str = ap_broker_cfg_str.replace("<pwd-hash>", pwd_hash)
+    ap_broker_cfg_str = ap_broker_cfg_str.replace("<ip-addr>", ip_addr)
+ap_broker_f.close()
+with open("dysonapbroker.things", 'w') as ap_broker_f:
+    ap_broker_f.write(ap_broker_cfg_str)
+ap_broker_f.close()
 
 # Create dysonXXX.items file
 dyson_items = "./dyson"+ap_type+".items"
