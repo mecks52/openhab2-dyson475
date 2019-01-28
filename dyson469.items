@@ -2,10 +2,10 @@
 
 // REQUESTS
 // 469/<id>/command
-String Dyson469_Request              "[%s]" {mqtt=">[dyson469:469/<dev-id>/command:command:*:default]"}
+String Dyson469_Request              "[%s]" {channel="mqtt:topic:dysonApBroker:dysonAp:command"}
 // TOPIC
 // 469/<id>/status/current
-String Dyson469_Topic_Status_Current "[%s]" {mqtt="<[dyson469:469/<dev-id>/status/current:state:default]"}
+String Dyson469_Topic_Status_Current "[%s]" {channel="mqtt:topic:dysonApBroker:dysonAp:status"}
 
 //VIRTUAL ITEMS
 Number Dyson469_Tact "Temperature [%.1f °C]"  <temperature>

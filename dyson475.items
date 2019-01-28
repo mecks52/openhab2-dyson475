@@ -2,10 +2,10 @@
 
 // REQUESTS
 // 475/<id>/command
-String Dyson475_Request              "[%s]" {mqtt=">[dyson475:475/<dev-id>/command:command:*:default]"}
+String Dyson475_Request              "[%s]" {channel="mqtt:topic:dysonApBroker:dysonAp:command"}
 // TOPIC
 // 475/<id>/status/current
-String Dyson475_Topic_Status_Current "[%s]" {mqtt="<[dyson475:475/<dev-id>/status/current:state:default]"}
+String Dyson475_Topic_Status_Current "[%s]" {channel="mqtt:topic:dysonApBroker:dysonAp:status"}
 
 //VIRTUAL ITEMS
 Number Dyson475_Tact "Temperature [%.1f °C]"  <temperature>
