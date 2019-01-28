@@ -1,7 +1,7 @@
 # openhab2-dyson475
 Files to integrate Dyson Pure Cool Link (475) air purifier into openHAB 2.  
 Tested with:
- - openHAB 2.2
+ - openHAB 2.4
  - Dyson SW-Ver. 21.03.08
  - Python 3.5
 
@@ -34,9 +34,9 @@ Get the files from the repository to your PC.
 ### Step 2)
 Run the python script "prepare.py". It asks you for the information from "Preparation" and prepares the files for usage with your device.
 ### Step 3)
-Install the mqtt binding within your openHAB installation.
+Install the mqtt binding within your openHAB installation. (CAVE: The "new" mqtt not the old mqtt1!)
 ### Step 4)
-Copy the content of mqtt.cfg file into services/mqtt.cfg.
+Copy the dysonapbroker.things into  direotory things at your openhab2 config.
 ### Step 5)
 Copy the dysonXXX.items suitable for your device (e.g. dyson455.items) into items/ and dysonXXX.rules (e.g. dyson455.rules) into rules/ directory.
 ### Step 6)
@@ -53,3 +53,6 @@ If you only need the hash value of the password, you can use this script.
 Feel free to write me a message or post into the related topic at the openHAB forum:  
 https://community.openhab.org/t/integrate-dyson-pure-cool-link/40416  
 There is also the possibility to open an issue here on github. If someone created an additional language sitemap, feel free to start a merge request or send a mail and I will integrate it into the repository.
+
+## openhab2 Versions before 2.4
+With 2.4 the new mqtt 2 binding was introduced. If you are running the old binding, you need the release v1 of this scripts (you find it under releases).
