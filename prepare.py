@@ -25,17 +25,6 @@ hash = hashlib.sha512()
 hash.update(pwd.encode('utf-8'))
 pwd_hash = base64.b64encode(hash.digest()).decode('utf-8')
 
-# Create mqtt.cfg file
-mqtt_cfg = "./mqtt"+ap_type+".cfg"
-with open(mqtt_cfg, 'r') as mqtt_cfg_f:
-    mqtt_cfg_str = mqtt_cfg_f.read()
-    mqtt_cfg_str = mqtt_cfg_str.replace("<dev-id>", dev_id)
-    mqtt_cfg_str = mqtt_cfg_str.replace("<pwd-hash>", pwd_hash)
-    mqtt_cfg_str = mqtt_cfg_str.replace("<ip-addr>", ip_addr)
-mqtt_cfg_f.close()
-with open("mqtt.cfg", 'w') as mqtt_cfg_f:
-    mqtt_cfg_f.write(mqtt_cfg_str)
-mqtt_cfg_f.close()
 # Create dysonapbroker.things file
 ap_broker = "./dysonapbroker.things"
 with open(ap_broker, 'r') as ap_broker_f:
