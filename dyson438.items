@@ -8,19 +8,35 @@ String Dyson438_Request              "[%s]" {channel="mqtt:topic:dysonApBroker:d
 String Dyson438_Topic_Status_Current "[%s]" {channel="mqtt:topic:dysonApBroker:dysonAp:status"}
 
 //VIRTUAL ITEMS
-Number Dyson438_Tact "Temperature [%.1f °C]"         <temperature>
-Number Dyson438_Hact "Humidity [%.0f %%]"            <humidity>
-Number Dyson438_Pact "P-Value [%d]"                  <smoke>
-Number Dyson438_Vact "V-Value [%d]"                  <smoke>
-Number Dyson438_Fmod "Mode"                          <switch>
-Switch Dyson438_Rhtm "Contin. Measurement"           <line>
-Number Dyson438_Fnsp "Fan Speed [%d]"                <flow>
-Number Dyson438_Qtar "Quality Target"                <smoke>
-Switch Dyson438_Oson "Turning"                       <incline>
-Switch Dyson438_Nmod "Night Mode"                    <moon>
-Number Dyson438_Filf "Remaining Filter Hours [%d h]" <sewerage>
-Number Dyson438_Fnst "Fan Activity [%d]"             <fan>
-Number Dyson438_Hmod "Heater Mode"                   <switch>
-Number Dyson438_Hmax "Target Temperature [%.1f °C]"  <temperature>
-Number Dyson438_Hsta "Heating Activity [%d]"         <radiator>
-Switch Dyson438_Ffoc "Heater Focus"                  <fan>
+// CURRENT-STATE
+Number Dyson438_Fpwr "Power"                         <switch>      //fpwr
+//fdir
+Switch Dyson438_Auto "Auto Mode"                     <switch>      //auto
+//oscs
+Switch Dyson438_Oson "Turning"                       <incline>     //oson
+Switch Dyson438_Nmod "Night Mode"                    <moon>        //nmod
+Switch Dyson438_Rhtm "Contin. Measurement"           <line>        //rhtm
+Number Dyson438_Fnst "Fan Activity [%d]"             <fan>         //fnst
+//ercd
+//wacd
+//nmdv
+Number Dyson438_Fnsp "Fan Speed [%d]"                <flow>        //fnsp
+//bril
+//corf
+//cflr
+//hflr
+//sltm
+//osal
+//osau
+//ancp
+
+// ENVIRONMENTAL-CURRENT-SENSOR-DATA
+Number Dyson438_Tact "Temperature [%.1f °C]"         <temperature> //tact
+Number Dyson438_Hact "Humidity [%.0f %%]"            <humidity>    //hact
+//pm25
+//pm10
+//va10
+//noxl
+//p25r
+//p10r
+//sltm
