@@ -8,7 +8,7 @@ import hashlib
 
 # Ask for information from device
 print("Which type of Dyson air purifier do you use?\n")
-print(" 438 - Pure Hot + Cool Link\n")
+print(" 438 - Pure Cool Link Tower (ab ca. 2018)\n")
 print(" 455 - Pure Hot + Cool Link\n")
 print(" 469 - Pure Cool Link\n")
 print(" 475 - Pure Cool Link Tower\n")
