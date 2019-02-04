@@ -123,4 +123,24 @@ then
     cmdStr = cmdStr + " \"mode-reason\": \"LAPP\" }"
     Dyson438_Request.sendCommand(cmdStr)
 end
+    // msg "SET-STATE" ####################################
+rule "438/<id>/command SET-STATE fpwr"
+when
+    Item Dyson438_Fpwr received command
+then
+    // Create current TimeStamp as UTC
+    simpleDF.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val String timeStampUtc = simpleDF.format(new java.util.Date())
+    // Cast fpwr to String representation
+    var String fpwr = "OFF"
+    switch receivedCommand {
+        case ON: fpwr = "ON"
+        case OFF: fpwr = "OFF"
+    }
+    // Create JSON for commanding and send it
+    cmdStr = startStateSetCmdStr + "\"" + timeStampUtc + "Z\","
+    cmdStr = cmdStr + "\"mode-reason\":\"LAPP\","
+    cmdStr = cmdStr + "\"data\":{\"fpwr\":\"" + fpwr + "\"}}"
+    Dyson438_Request.sendCommand(cmdStr)
+end
 //#############################################################################
