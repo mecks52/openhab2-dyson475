@@ -1,8 +1,9 @@
-'''
+#!/usr/bin/python3
+"""
 Prepares the files for usage in openHAB.
 Script asks for the SSID and password from sticker, transfers them to the
 needed configuration information and stores it into th the openHAB files.
-'''
+"""
 import base64
 import hashlib
 
@@ -20,7 +21,10 @@ pwd = input("Product WiFi Password (e.g.: adgjsfhk):")
 ip_addr = input("Type in the IP-Adress of the air purifier (e.g. 192.168.178.100):")
 
 # Transfer ssid to device identification
-dev_id = ssid[6:21]
+if 455 <= int(ap_type) <= 475:
+    dev_id = ssid[6:-4]
+else:
+    dev_id = ssid[:-4]
 # Transfer password to hash version
 hash = hashlib.sha512()
 hash.update(pwd.encode('utf-8'))
