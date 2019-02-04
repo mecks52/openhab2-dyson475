@@ -32,16 +32,78 @@ then
             postUpdate(Dyson438_Hact, hact as Number)
         }
     } else if (msg == "CURRENT-STATE") {
-        val String fmod_str = transform("JSONPATH", "$.product-state.fpwr", content)
-        switch fmod_str {
-            case "ON": postUpdate(Dyson438_Fpwr, 1 as Number)
-            case "OFF": postUpdate(Dyson438_Fpwr, 0 as Number)
+        if (transform("JSONPATH", "$.product-state.fpwr", content) == "ON") {
+            postUpdate(Dyson438_Fpwr, ON)
+        } else {
+            postUpdate(Dyson438_Fpwr, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.auto", content) == "ON") {
+            postUpdate(Dyson438_Auto, ON)
+        } else {
+            postUpdate(Dyson438_Auto, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.rhtm", content) == "ON") {
+            postUpdate(Dyson438_Rhtm, ON)
+        } else {
+            postUpdate(Dyson438_Rhtm, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.oson", content) == "ON") {
+            postUpdate(Dyson438_Oson, ON)
+        } else {
+            postUpdate(Dyson438_Oson, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.nmod", content) == "ON") {
+            postUpdate(Dyson438_Nmod, ON)
+        } else {
+            postUpdate(Dyson438_Nmod, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.fnst", content) == "FAN") {
+            postUpdate(Dyson438_Fnst, 1)
+        } else {
+            postUpdate(Dyson438_Fnst, 0)
+        }
+        val String fnsp = transform("JSONPATH", "$.product-state.fnsp", content)
+        if (fnsp == "AUTO") {
+            postUpdate(Dyson438_Fnsp, 11 as Number)
+        } else {
+            postUpdate(Dyson438_Fnsp, Integer.parseInt(fnsp) as Number)
         }
     } else if (msg == "STATE-CHANGE") {
-        val String fmod_str = transform("JSONPATH", "$.product-state.fpwr[1]", content)
-        switch fmod_str {
-            case "ON": postUpdate(Dyson438_Fpwr, 1 as Number)
-            case "OFF": postUpdate(Dyson438_Fpwr, 0 as Number)
+        if (transform("JSONPATH", "$.product-state.fpwr[1]", content) == "ON") {
+            postUpdate(Dyson438_Fpwr, ON)
+        } else {
+            postUpdate(Dyson438_Fpwr, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.auto[1]", content) == "ON") {
+            postUpdate(Dyson438_Auto, ON)
+        } else {
+            postUpdate(Dyson438_Auto, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.rhtm[1]", content) == "ON") {
+            postUpdate(Dyson438_Rhtm, ON)
+        } else {
+            postUpdate(Dyson438_Rhtm, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.oson[1]", content) == "ON") {
+            postUpdate(Dyson438_Oson, ON)
+        } else {
+            postUpdate(Dyson438_Oson, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.nmod[1]", content) == "ON") {
+            postUpdate(Dyson438_Nmod, ON)
+        } else {
+            postUpdate(Dyson438_Nmod, OFF)
+        }
+        if (transform("JSONPATH", "$.product-state.fnst[1]", content) == "FAN") {
+            postUpdate(Dyson438_Fnst, 1)
+        } else {
+            postUpdate(Dyson438_Fnst, 0)
+        }
+        val String fnsp = transform("JSONPATH", "$.product-state.fnsp[1]", content)
+        if (fnsp == "AUTO") {
+            postUpdate(Dyson438_Fnsp, 11 as Number)
+        } else {
+            postUpdate(Dyson438_Fnsp, Integer.parseInt(fnsp) as Number)
         }
     }
 end

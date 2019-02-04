@@ -2,6 +2,12 @@ sitemap dyson438en label="Dyson Pure Cool Link Sitemap" {
     Frame label="Pure Cool Link" {
         Default  item=Dyson438_Tact label="Temperature [%.1f °C]"
         Default  item=Dyson438_Hact label="Humidity [%.0f %%]"
-        Switch   item=Dyson438_Fpwr label="Mode" mappings=[0="OFF", 1="ON"]
+        Default  item=Dyson438_Fpwr label="Power"
+        Default  item=Dyson475_Rhtm label="Contin. Measurement"
+        Default  item=Dyson438_Oson label="Turning"
+        Default  item=Dyson438_Nmod label="Night Mode"
+        Default  item=Dyson475_Fnst label="Fan Activity [%d]"
+        Default  item=Dyson438_Auto label="Auto-Mode"
+        Setpoint item=Dyson475_Fnsp label="Fan Speed [%d]" minValue=1 maxValue=10 step=1
     }
 }

@@ -9,7 +9,7 @@ String Dyson438_Topic_Status_Current "[%s]" {channel="mqtt:topic:dysonApBroker:d
 
 //VIRTUAL ITEMS
 // CURRENT-STATE
-Number Dyson438_Fpwr "Power"                         <switch>      //fpwr
+Switch Dyson438_Fpwr "Power"                         <switch>      //fpwr
 //fdir
 Switch Dyson438_Auto "Auto Mode"                     <switch>      //auto
 //oscs
